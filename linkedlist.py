@@ -1,4 +1,3 @@
-# node and linked list
 
 
 class Node:
