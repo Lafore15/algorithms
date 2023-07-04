@@ -106,3 +106,30 @@ def merge_sort(l):
     left = merge_sort(l[:mid])
     right = merge_sort((l[mid:]))
     return merge(left, right)
+
+
+# quick sort
+
+
+def quicksort(values):
+    qs(values, 0, len(values) - 1)
+    return values
+
+
+def qs(values, left, right):
+    if left >= right:
+        return
+    p = partition(values, left, right)
+    qs(values, left, p - 1)
+    qs(values, p + 1, right)
+
+
+def partition(values, left, right):
+    pivot = values[right]
+    i = left - 1
+    for j in range(left, right):
+        if values[j] < pivot:
+            i += 1
+            values[i], values[j] = values[j], values[i]
+    values[i + 1], values[right] = values[right], values[i + 1]
+    return i + 1
