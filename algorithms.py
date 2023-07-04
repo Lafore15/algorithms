@@ -23,12 +23,12 @@ def bfs(root):
     deque = deque()
     deque.append(root)
     while deque:
-        cur_vertex = deque.popleft()
-        print(cur_vertex)
-        if cur_vertex.left:
-            deque.append(cur_vertex.left)
-        if cur_vertex.right:
-            deque.append(cur_vertex.right)
+        cur_node = deque.popleft()
+        print(cur_node)
+        if cur_node.left:
+            deque.append(cur_node.left)
+        if cur_node.right:
+            deque.append(cur_node.right)
     return True
 
 # for graphs
@@ -44,6 +44,22 @@ def bfs_2(graph):
             if neighbour not in visited:
                 deque.append(neighbour)
                 visited.add(neighbour)
+    return True
+
+
+#   dfs algorithms
+
+
+# for binary tree
+
+def dfs(root):
+    stack = [root]
+    while stack:
+        cur_node = stack.pop()
+        if cur_node:
+            print(cur_node)
+            stack.append(cur_node.right)
+            stack.append(cur_node.left)
     return True
 
 
