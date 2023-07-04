@@ -33,9 +33,10 @@ def bfs(root):
 
 # for graphs
 
-def bfs_2(graph):
+
+def bfs_2(graph, node):
     from collections import deque
-    deque = deque([graph])
+    deque = deque([node])
     visited = set()
     while deque:
         cur_node = deque.popleft()
@@ -60,6 +61,22 @@ def dfs(root):
             print(cur_node)
             stack.append(cur_node.right)
             stack.append(cur_node.left)
+    return True
+
+
+# for graphs
+
+
+def dfs_2(graph, node):
+    visited = set()
+    stack = [node]
+    while stack:
+        cur_node = stack.pop()
+        stack.append(cur_node)
+        visited.add(cur_node)
+        for neighbour in graph[cur_node]:
+            if neighbour not in visited:
+                stack.append(neighbour)
     return True
 
 
