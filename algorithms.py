@@ -31,6 +31,7 @@ def bfs(root):
             deque.append(cur_node.right)
     return True
 
+
 # for graphs
 
 
@@ -80,5 +81,28 @@ def dfs_2(graph, node):
     return True
 
 
+# merge sort
+def merge(l1, l2):
+    result = []
+    length1, length2 = len(l1), len(l2)
+    i, j = 0, 0
+    while i < length1 and j < length2:
+        if l1[i] < l2[j]:
+            result.append(l1[i])
+        else:
+            result.append((l2[j]))
+    if i < length1:
+        result += l1[i:]
+    if j < length2:
+        result += l2[j:]
+    return result
 
 
+def merge_sort(l):
+    length = len(l)
+    if length <= 1:
+        return l
+    mid = length // 2
+    left = merge_sort(l[:mid])
+    right = merge_sort((l[mid:]))
+    return merge(left, right)
