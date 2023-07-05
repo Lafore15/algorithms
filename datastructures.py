@@ -77,3 +77,30 @@ class LinkedList:
                 return
             else:
                 cur_node = cur_node.next
+
+
+class DisjointSet:
+    parent = {}
+
+    # perform MakeSet operation
+    def makeSet(self, n):
+        # create `n` disjoint sets (one for each vertex)
+        for i in range(n):
+            self.parent[i] = i
+
+    # Find the root of the set in which element `k` belongs
+    def find(self, k):
+        # if `k` is root
+        if self.parent[k] == k:
+            return k
+
+        # recur for the parent until we find the root
+        return self.find(self.parent[k])
+
+    # Perform Union of two subsets
+    def union(self, a, b):
+        # find the root of the sets in which elements `x` and `y` belongs
+        x = self.find(a)
+        y = self.find(b)
+
+        self.parent[x] = y
