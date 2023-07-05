@@ -1,3 +1,4 @@
+import datastructures
 # binary search
 def binary_search(values, target):
     # values = sorted(values)
@@ -171,3 +172,19 @@ def pyramid_sort(values):
     return values
 
 
+# Kraskal's algorithm
+
+def runKraskal(edges: list[tuple], n: int):
+    mst = []
+    ds = datastructures.DisjointSet()
+    ds.makeSet(edges)
+    index = 0
+    edges.sort(key=lambda x: x[2])
+    while len(mst) != n - 1:
+        src, dst, weight = edges[index]
+        index += 1
+        a, b = ds.find(src), ds.find(dst)
+        if a != b:
+            mst.append([src, dst, weight])
+            ds.union(a, b)
+    return mst
