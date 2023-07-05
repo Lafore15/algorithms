@@ -133,3 +133,41 @@ def partition(values, left, right):
             values[i], values[j] = values[j], values[i]
     values[i + 1], values[right] = values[right], values[i + 1]
     return i + 1
+
+
+# pyramid sort(heap sort)
+
+def swap(values, i, j):
+    values[i], values[j] = values[j], values[i]
+
+
+def pyramid_sort(values):
+    for i in range(1, len(values)):
+        index = i
+        while index != 0:
+            parent = (index - 1) // 2
+            if values[index] <= values[parent]:
+                break
+            swap(values, index, parent)
+            index = parent
+    for i in range(len(values) - 1, 0, -1):
+        swap(values, 0, i)
+        index = 0
+        while True:
+            child1 = 2 * index + 1
+            child2 = 2 * index + 2
+            if child1 >= i:
+                child1 = index
+            if child2 >= i:
+                child2 = index
+            if values[child1] <= values[index] and values[child2] <= values[index]:
+                break
+            if values[child1] > values[child2]:
+                swap_child = child1
+            else:
+                swap_child = child2
+            swap(values, index, swap_child)
+            index = swap_child
+    return values
+
+
