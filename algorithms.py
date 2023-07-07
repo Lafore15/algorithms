@@ -174,7 +174,7 @@ def pyramid_sort(values):
     return values
 
 
-# Kraskal's algorithm
+# Kruskal's algorithm
 
 def mst(edges: list[tuple], n: int):
     result = []
