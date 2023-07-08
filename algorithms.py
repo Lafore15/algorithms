@@ -207,3 +207,20 @@ def floyd_warshall(G, nV):
             for j in range(nV):
                 distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j])
     return distance
+
+
+# Dijkstra algorithm
+
+
+def dijkstra(graph, start, end):
+    from collections import deque
+    deque = deque([start])
+    short_distances = {start: 0}
+    while deque:
+        cur_v = deque.popleft()
+        for neigh_v in graph[cur_v]:
+            if neigh_v not in short_distances or (short_distances[cur_v] + graph[cur_v][neigh_v]) < short_distances[neigh_v]:
+                short_distances[neigh_v] = short_distances[cur_v] + graph[cur_v][neigh_v]
+                deque.append(neigh_v)
+    return short_distances
+
