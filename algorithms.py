@@ -263,3 +263,17 @@ def bellman_ford(edges: list[tuple], start, n):
         (1, 4, 2), (3, 2, 5), (3, 1, 1), (4, 3, -3)
     ], 0, 5))'''
 
+
+# Kadane's algorithm
+
+
+def kadane(arr):
+    max_so_far = 0
+    max_ending_here = 0
+    for i in arr:
+        max_ending_here += i
+        max_ending_here = max(max_ending_here, 0)
+        max_so_far = max(max_so_far, max_ending_here)
+    return max_so_far
+
+
