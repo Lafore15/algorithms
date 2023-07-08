@@ -1,4 +1,6 @@
 import datastructures
+import copy
+
 # binary search
 
 
@@ -190,3 +192,18 @@ def mst(edges: list[tuple], n: int):
             result.append([src, dst, weight])
             ds.union(a, b)
     return result
+
+
+# Floyd-Warshall algorithm
+INF = float('inf')
+
+
+def floyd_warshall(G, nV):
+    distance = copy.deepcopy(G)
+
+    # Adding vertices individually
+    for k in range(nV):
+        for i in range(nV):
+            for j in range(nV):
+                distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j])
+    return distance
