@@ -222,5 +222,44 @@ def dijkstra(graph, start, end):
             if neigh_v not in short_distances or (short_distances[cur_v] + graph[cur_v][neigh_v]) < short_distances[neigh_v]:
                 short_distances[neigh_v] = short_distances[cur_v] + graph[cur_v][neigh_v]
                 deque.append(neigh_v)
-    return short_distances
+    return short_distances[end]
+
+
+# Bellman-Ford algorithm
+
+
+def getpath(vertex, parents: dict):
+    if parents[vertex] is None:
+        return [vertex]
+    return getpath(parents[vertex], parents) + [vertex]
+
+
+def bellman_ford(edges: list[tuple], start, n):
+    # can be improved by adding a variable that will control if nothing changes during the loop
+    short_distances = {start: 0}
+    vertexes = set([edge[0] for edge in edges] + [edge[1] for edge in edges])
+    parents = {start: None}
+    for vertex in vertexes:
+        if vertex != start:
+            short_distances[vertex] = float('inf')
+    for k in range(n - 1):
+        for src, dst, weight in edges:
+            if short_distances[src] != float('inf') and short_distances[src] + weight < short_distances[dst]:
+                short_distances[dst] = short_distances[src] + weight
+                parents[dst] = src
+    for src, dst, weight in edges:
+        if short_distances[dst] > short_distances[src] + weight:
+            return False
+    path = []
+    for i in vertexes:
+        if i != start:
+            path.append(getpath(i, parents))
+    return short_distances, parents, path
+
+
+'''print(bellman_ford([
+        # (x, y, w) —> edge from `x` to `y` having weight `w`
+        (0, 1, -1), (0, 2, 4), (1, 2, 3), (1, 3, 2),
+        (1, 4, 2), (3, 2, 5), (3, 1, 1), (4, 3, -3)
+    ], 0, 5))'''
 
